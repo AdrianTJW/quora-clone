@@ -19,6 +19,18 @@
             <form method=post action="/questions/<%= x.id %>">
               <button>Delete</button>
             </form>
+
+            <form method=post action="/question/<%= x.id %>/questionvotes">
+              <button>Upvote</button>
+              <% upvote_count = QuestionVote.where(question_id: x.id, vote: "true").count %>
+              <%= upvote_count %>
+            </form>
+            
+            <form method=post action="/question/<%= x.id %>/questionvotes1">
+              <button>Downvote</button>
+              <% downvote_count = QuestionVote.where(question_id: x.id, vote: "false").count %>
+              <%= downvote_count %>
+            </form>
           </li>
         </ul>
       <% end %>

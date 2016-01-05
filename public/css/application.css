@@ -6,7 +6,7 @@
   background-position: center top;
   left: 50%;
   margin-left: -942px;
-  height: 1300px;
+  height: 1191px;
   width: 1884px;
 }
 
@@ -95,6 +95,7 @@ div {
   float: left;
   box-sizing: border-box;
   width: 50%;
+  position: relative;
 }
 
 .login {

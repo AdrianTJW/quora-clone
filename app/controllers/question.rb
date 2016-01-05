@@ -16,7 +16,7 @@ get '/questions/new' do
 end
 
 get '/questions/:id/edit' do
-
+	
 end
 
 post '/questions' do
@@ -28,10 +28,10 @@ end
 
 # end
 
-post '/questions/:question_id' do
+delete '/questions/:question_id' do
 	@question = Question.find(params[:question_id])
-	@question.delete
-	redirect to "/"
+	@question.destroy
+	redirect to "/questions"
 end
 
 
