@@ -21,6 +21,10 @@
         <button>Delete</button>
       </form>
 
+      <form method=get action="/questions/<%= @question.id %>/edit">
+        <button>Edit</button>
+      </form>
+
       <form method=post action="/question/<%= @question.id %>/questionvotes">
         <button>Upvote</button>
         <% upvote_count = QuestionVote.where(question_id: @question.id, vote: "true").count %>
@@ -44,6 +48,11 @@
         <form method=post action="/answers/<%= a.id %>">
           <input name="_method" type="hidden" value="delete"/>
           <button>Delete</button>
+        </form>
+
+        <form method=get action="/answers/<%= a.id %>/edit">
+          <input name="_method" type="hidden" value= "patch"/>
+          <button>Edit</button>
         </form>
 
         <form method=post action="/answer/<%= a.id %>/answervotes">
@@ -71,6 +80,10 @@
               <button>Delete</button>
             </form>
             
+            <form method=get action="/questions/<%= x.id %>/edit">
+              <button>Edit</button>
+            </form>
+
             <form method=post action="/question/<%= x.id %>/questionvotes">
               <button>Upvote</button>
               <% upvote_count = QuestionVote.where(question_id: x.id, vote: "true").count %>

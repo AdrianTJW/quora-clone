@@ -17,13 +17,21 @@ get '/answers/new' do
 end
 
 get '/answers/:id/edit' do
-	
+	@answer = Answer.find(params[:id])
+	erb :"static/edit"
 end
 
 post '/question/:id/answers' do
 	@question = Question.find(params[:id])
 	@answer = @question.answers.create(answer: params[:answer], user_id: session[:user_id])
 	redirect to "/answers/#{@answer.id}"
+end
+
+patch '/answers/:id' do
+	@answer = Answer.find(params[:id])
+	@answer.update(answer: params[:answer])
+	@question = @answer.question
+	erb :"static/question"
 end
 
 delete '/answers/:id' do

@@ -1,7 +1,7 @@
 require_relative '../models/question'
 require 'byebug'
 
-get '/questions' do
+get '/questions' do #listing all questions
 	@questions = Question.all
 	erb :"static/question"
 end
@@ -16,7 +16,8 @@ get '/questions/new' do
 end
 
 get '/questions/:id/edit' do
-	
+	@question = Question.find(params[:id])
+	erb :"static/edit"
 end
 
 post '/questions' do
@@ -24,9 +25,11 @@ post '/questions' do
 	redirect to "/questions/#{question.id}"
 end
 
-# put 'questions/:id' do
-
-# end
+patch '/questions/:id' do
+	@question = Question.find(params[:id])
+	@question.update(question: params[:question])
+	erb :"static/question"
+end
 
 delete '/questions/:question_id' do
 	@question = Question.find(params[:question_id])
