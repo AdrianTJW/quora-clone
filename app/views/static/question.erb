@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="/css/application.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery.min.js"></script>
+    <script src="/js/application.js" type='text/javascript'></script>
+    
+    <title>Quora</title>
+  </head>
+
+  <body>
+  	<p><a href="/">Mainpage</a></p>
+    <% if @question %>
+      <a href="/questions/<%= @question.id %>"><%= @question.question %></a>
+      <%= @question.user.fullname %>
+
+      <form method=post action="/questions/<%= @question.id %>">
+        <button>Delete</button>
+      </form>
+
+      <form method=post action="/question/<%= @question.id %>/answers">
+        <input id="answer_bar" type=text placeholder="Write your answer" name="answer">
+        <input id="answer_button" type=submit value="Write Answer">
+      </form>
+      
+      <% @question.answers.each do |a| %>
+        <p><%= a.answer %></p>
+        <%= a.user.fullname %>
+      <% end %>
+
+    <% else %>
+      <% @questions.each do |x| %>
+        <ul>
+          <li>
+            <a href="/questions/<%= x.id %>" target="_blank"><%= x.question %></a>
+            <form method=post action="/questions/<%= x.id %>">
+              <button>Delete</button>
+            </form>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
+  </body>
+
+ </html>
