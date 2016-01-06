@@ -6,6 +6,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery.min.js"></script>
     <script src="/js/application.js" type='text/javascript'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     
     <title>Quora</title>
   </head>
@@ -25,12 +26,11 @@
         <button>Edit</button>
       </form>
 
-      <form method=post action="/question/<%= @question.id %>/questionvotes">
+      <form class="upvote" method=post action="/question/<%= @question.id %>/questionvotes" >
         <button>Upvote</button>
-        <% upvote_count = QuestionVote.where(question_id: @question.id, vote: "true").count %>
-        <%= upvote_count %>
+        <%= QuestionVote.where(question_id: @question.id, vote: "true").count %>
       </form>
-      
+            
       <form method=post action="/question/<%= @question.id %>/questionvotes1">
         <button>Downvote</button>
         <% downvote_count = QuestionVote.where(question_id: @question.id, vote: "false").count %>
@@ -58,10 +58,9 @@
         <form method=post action="/answer/<%= a.id %>/answervotes">
           <input name="@question_id" type="hidden" value= <%= @question.id %> />
           <button>Upvote</button>
-          <% upvote_count = AnswerVote.where(answer_id: a.id, vote: "true").count %>
-          <%= upvote_count %>
+          <%= AnswerVote.where(answer_id: a.id, vote: "true").count %>
         </form>
-      
+          
         <form method=post action="/answer/<%= a.id %>/answervotes1">
           <input name="@question_id" type="hidden" value= <%= @question.id %> />
           <button>Downvote</button>
@@ -86,16 +85,14 @@
 
             <form method=post action="/question/<%= x.id %>/questionvotes">
               <button>Upvote</button>
-              <% upvote_count = QuestionVote.where(question_id: x.id, vote: "true").count %>
-              <%= upvote_count %>
+              <%= QuestionVote.where(question_id: x.id, vote: "true").count %>
             </form>
             
             <form method=post action="/question/<%= x.id %>/questionvotes1">
               <button>Downvote</button>
-              <% downvote_count = QuestionVote.where(question_id: x.id, vote: "false").count %>
-              <%= downvote_count %>
+              <%= QuestionVote.where(question_id: x.id, vote: "false").count %>
             </form>
-            
+              
           </li>
         </ul>
       <% end %>

@@ -11,9 +11,35 @@
   </head>
 
   <body>
-  	<h1>Temporary User page<h1>
+  	<h1><a href="/users/<%= @user.id %>"><%= @user.fullname %>'s Profile</a></h1>
   	<p><a href="http://localhost:9393/login">Sign Out</a></p>
     <p><a href="http://localhost:9393/">Main Page</a></p>
+
+    <form method=post action="/users/<%= @user.id %>/questions">
+      <button>My Questions</button>
+      <%unless @questions.nil?%>
+        <%@questions.each do |q| %>
+          <ul>
+            <li>
+              <a href="/questions/<%= q.id %>"><%= q.question%></a>
+            </li>
+          </ul>
+        <%end%>
+      <%end%>
+    </form>
+
+    <form method=post action="/users/<%= @user.id %>/answers">
+      <button>My Answers</button>
+      <%unless @answers.nil?%>
+        <%@answers.each do |s| %>
+          <ul>
+            <li>
+              <%= s.answer%>
+            </li>
+          </ul>
+        <%end%>
+      <%end%>
+    </form>
   </body>
 
  </html>

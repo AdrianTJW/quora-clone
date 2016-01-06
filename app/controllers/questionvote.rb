@@ -1,5 +1,4 @@
 require_relative '../models/question_vote'
-require 'byebug'
 
 post '/question/:id/questionvotes' do 
 	@question = Question.find(params[:id])
@@ -9,7 +8,9 @@ post '/question/:id/questionvotes' do
 	else
 		@questionvote = @question.question_votes.create(user_id: session[:user_id], vote: true)
 	end
-	erb :"static/question"
+	# @upvote_count = QuestionVote.where(question_id: @question.id, vote: "true").count
+ #  @upvote_count.to_json
+ 	erb :"static/question"
 end
 
 post '/question/:id/questionvotes1' do 

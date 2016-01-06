@@ -1,5 +1,4 @@
 require_relative '../models/user'
-require 'byebug'
 
 get '/login' do
   erb :"static/index"
@@ -13,7 +12,21 @@ get '/' do
 	erb :"static/mainpage"
 end
 
-get '/users/:id' do
+get '/users/:user_id' do
+	@user = User.find(session[:user_id])
+
+	erb :"static/user"
+end
+
+post '/users/:user_id/questions' do
+	@user = User.find(session[:user_id])
+	@questions = @user.questions
+	erb :"static/user"
+end
+
+post '/users/:user_id/answers' do
+	@user = User.find(session[:user_id])
+	@answers = @user.answers
 	erb :"static/user"
 end
 
